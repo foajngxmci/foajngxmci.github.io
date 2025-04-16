@@ -455,6 +455,29 @@ ol {
 	z-index: 9;
 }
 
+/* tambah */
+/* Tambahkan di bagian Hero Section */
+.hero__text {
+	background: rgba(0, 0, 0, 0.6); /* Background gelap semi-transparan */
+	padding: 25px;
+	border-radius: 5px;
+	display: inline-block;
+  }
+  
+  .hero__text h2 {
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Shadow teks */
+  }
+  
+  .hero__text p {
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Shadow teks */
+  }
+  
+  .hero__text .label {
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Shadow label */
+  }
+/*  */
+
+
 .hero__text .label {
 	font-size: 13px;
 	color: #e53637;
