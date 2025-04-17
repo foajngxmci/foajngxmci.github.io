@@ -140,6 +140,40 @@
     <!-- Search model end -->
 
     <!-- Js Plugins -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded'); // Debug 1
+            
+            // Generate page select
+            const pageSelect = document.getElementById('page-select');
+            console.log('Page select element:', pageSelect); // Debug 2
+            
+            for(let i = 1; i <= 50; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.text = `Page ${String(i).padStart(2, '0')}`;
+                pageSelect.appendChild(option);
+            }
+    
+            // Double tap handler
+            let lastTap = 0;
+            document.addEventListener('touchstart', function(e) {
+                console.log('Tap detected'); // Debug 3
+                const currentTime = new Date().getTime();
+                const tapLength = currentTime - lastTap;
+                
+                if (tapLength < 500 && tapLength > 0) {
+                    console.log('Double tap!'); // Debug 4
+                    document.querySelector('.mobile-progress-menu').classList.toggle('active');
+                    document.querySelector('.page-jump-menu').classList.toggle('active');
+                    e.preventDefault();
+                }
+                lastTap = currentTime;
+            });
+    
+            // ... kode lainnya tetap sama ...
+        });
+    </script>
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/player.js"></script>
