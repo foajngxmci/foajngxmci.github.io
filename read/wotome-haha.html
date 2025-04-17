@@ -221,14 +221,57 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const pageSelect = document.getElementById('page-select');
-            // Populasi dropdown
-            for (let i = 1; i <= 50; i++) {
+            // const pageSelect = document.getElementById('page-select');
+            // // Populasi dropdown
+            // for (let i = 1; i <= 50; i++) {
+            //     const option = document.createElement('option');
+            //     option.value = i;
+            //     option.textContent = `Page ${String(i).padStart(2, '0')}`;
+            //     pageSelect.appendChild(option);
+            // }
+
+            // // Scroll to gambar saat pilih dropdown
+            // pageSelect.addEventListener('change', (e) => {
+            //     const pageNum = e.target.value;
+            //     if (!pageNum) return;
+            //     const imgs = document.querySelectorAll('#gambar-container img');
+            //     const target = imgs[pageNum - 1];
+            //     if (target) target.scrollIntoView({ behavior: 'smooth' });
+            // });
+
+            const chapterSelect = document.getElementById('chapter-select');
+
+            // Daftar chapter dan index gambar tujuan
+            const chapters = [
+                { name: "Chapter 1: Beginning", targetImgIndex: 0 },   // Gambar pertama
+                { name: "Chapter 2: Conflict", targetImgIndex: 42 },   // Gambar ke-43
+                { name: "Chapter 3: Resolution", targetImgIndex: 98 },
+                { name: "Chapter 4: Epilogue", targetImgIndex: 155 }
+            ];
+
+            // Populasi dropdown chapter
+            chapters.forEach((chapter, index) => {
                 const option = document.createElement('option');
-                option.value = i;
-                option.textContent = `Page ${String(i).padStart(2, '0')}`;
-                pageSelect.appendChild(option);
-            }
+                option.value = index;
+                option.textContent = chapter.name;
+                chapterSelect.appendChild(option);
+            });
+
+            // Scroll ke gambar saat pilih chapter
+            chapterSelect.addEventListener('change', (e) => {
+                const chapterIndex = e.target.value;
+                if (!chapterIndex) return;
+
+                const target = chapters[chapterIndex].targetImgIndex;
+                const imgs = document.querySelectorAll('#gambar-container img');
+
+                if (imgs[target]) {
+                    imgs[target].scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
 
             // Update progress bar saat scroll
             window.addEventListener('scroll', () => {
@@ -238,14 +281,6 @@
                 document.getElementById('scroll-progress-bar').style.width = scrolled + '%';
             });
 
-            // Scroll to gambar saat pilih dropdown
-            pageSelect.addEventListener('change', (e) => {
-                const pageNum = e.target.value;
-                if (!pageNum) return;
-                const imgs = document.querySelectorAll('#gambar-container img');
-                const target = imgs[pageNum - 1];
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
-            });
 
             // Toggle show/hide menu dengan double tap
             let lastTap = 0;
