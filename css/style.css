@@ -2365,3 +2365,60 @@ ol {
 }
 
 
+.mobile-progress-menu {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 5px;
+	background: rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+	/* display: none; */
+}
+
+.mobile-progress-menu.active {
+	display: block;
+}
+
+.mobile-progress-menu .progress-container {
+	width: 100%;
+	height: 100%;
+}
+
+#scroll-progress-bar {
+	height: 100%;
+	width: 0;
+	background: #e53637;
+}
+
+.page-jump-menu {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 10px;
+	background: rgba(0, 0, 0, 0.6);
+	z-index: 1000;
+	display: none;
+	text-align: center;
+}
+
+.page-jump-menu.active {
+	display: block;
+}
+
+.page-jump-menu select {
+	width: 90%;
+	padding: 10px;
+	border-radius: 5px;
+	border: none;
+}
+
+@media only screen and (min-width: 768px) {
+
+	/* Sembunyikan menu mobile pada layar >768px */
+	/* .mobile-progress-menu, */
+	.page-jump-menu {
+		display: none !important;
+	}
+}

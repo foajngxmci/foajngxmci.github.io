@@ -23,65 +23,9 @@
     <link rel="stylesheet" href="../css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="../css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="../css/style.css" type="text/css">
-    <style>
-        .mobile-progress-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            display: none;
-        }
-
-        .mobile-progress-menu.active {
-            display: block;
-        }
-
-        .mobile-progress-menu .progress-container {
-            width: 100%;
-            height: 100%;
-        }
-
-        #scroll-progress-bar {
-            height: 100%;
-            width: 0;
-            background: #e53637;
-        }
-
-        .page-jump-menu {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1000;
-            display: none;
-            text-align: center;
-        }
-
-        .page-jump-menu.active {
-            display: block;
-        }
-
-        .page-jump-menu select {
-            width: 90%;
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-        }
-
-        @media only screen and (min-width: 768px) {
-
-            /* Sembunyikan menu mobile pada layar >768px */
-            .mobile-progress-menu,
-            .page-jump-menu {
-                display: none !important;
-            }
-        }
-    </style>
+    <!-- <style>
+        
+    </style> -->
 </head>
 
 <body>
@@ -142,14 +86,7 @@
 
                         const img = document.createElement("img");
 
-                        if (i == 1 || i == 2 || i == 3) {
-                            if (i == 2) {
-                                continue;
-                            }
-                            img.src = `../img/manga/Wotome Haha Maiden Mother/${num}.jpg`;
-                        } else {
-                            img.src = `../img/manga/Wotome Haha Maiden Mother/${num}.png`;
-                        }
+                        img.src = `../img/manga/Wotome Haha Maiden Mother/${num}.webp`;
 
                         img.alt = `Gambar ${num}`;
                         container.appendChild(img);
@@ -173,16 +110,6 @@
                         <a href="./index.html"><img src="../img/logo.png" alt=""></a>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="footer__nav">
-                        <ul>
-                            <li class="active"><a href="./index.html">Homepage</a></li>
-                            <li><a href="./categories.html">Categories</a></li>
-                            <li><a href="./blog.html">Our Blog</a></li>
-                            <li><a href="#">Contacts</a></li>
-                        </ul>
-                    </div>
-                </div>
                 <div class="col-lg-3">
                     <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         Copyright &copy;
@@ -198,17 +125,6 @@
     </footer>
     <!-- Footer Section End -->
 
-    <!-- Search model Begin -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch"><i class="icon_close"></i></div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
-        </div>
-    </div>
-    <!-- Search model end -->
-
     <!-- Js Plugins -->
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -221,32 +137,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // const pageSelect = document.getElementById('page-select');
-            // // Populasi dropdown
-            // for (let i = 1; i <= 50; i++) {
-            //     const option = document.createElement('option');
-            //     option.value = i;
-            //     option.textContent = `Page ${String(i).padStart(2, '0')}`;
-            //     pageSelect.appendChild(option);
-            // }
-
-            // // Scroll to gambar saat pilih dropdown
-            // pageSelect.addEventListener('change', (e) => {
-            //     const pageNum = e.target.value;
-            //     if (!pageNum) return;
-            //     const imgs = document.querySelectorAll('#gambar-container img');
-            //     const target = imgs[pageNum - 1];
-            //     if (target) target.scrollIntoView({ behavior: 'smooth' });
-            // });
 
             const chapterSelect = document.getElementById('chapter-select');
 
             // Daftar chapter dan index gambar tujuan
             const chapters = [
-                { name: "Chapter 1: Beginning", targetImgIndex: 0 },   // Gambar pertama
-                { name: "Chapter 2: Conflict", targetImgIndex: 42 },   // Gambar ke-43
-                { name: "Chapter 3: Resolution", targetImgIndex: 98 },
-                { name: "Chapter 4: Epilogue", targetImgIndex: 155 }
+                { name: "Chapter 1: Beginning", targetImgIndex: 0 },
+                { name: "Chapter 2: Lesson", targetImgIndex: 59 },
+                { name: "Chapter 3: Aunt", targetImgIndex: 91 },
+                { name: "Chapter 4: Foreigner", targetImgIndex: 125 },
+                { name: "Chapter 5: Final", targetImgIndex: 169 }
             ];
 
             // Populasi dropdown chapter
@@ -281,7 +181,6 @@
                 document.getElementById('scroll-progress-bar').style.width = scrolled + '%';
             });
 
-
             // Toggle show/hide menu dengan double tap
             let lastTap = 0;
             document.addEventListener('touchstart', (e) => {
@@ -300,8 +199,8 @@
 
     <!-- Page Jump Dropdown Menu -->
     <div class="page-jump-menu">
-        <select id="page-select" aria-label="Jump to page">
-            <option value="">Pilih Halaman</option>
+        <select id="chapter-select" aria-label="Jump to page">
+            <option value="">Pilih Chapter</option>
             <!-- Options akan dipopulasi lewat JS -->
         </select>
     </div>
