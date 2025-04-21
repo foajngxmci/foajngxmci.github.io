@@ -2364,7 +2364,7 @@ ol {
 	}
 }
 
-
+/* 
 .mobile-progress-menu {
 	position: fixed;
 	top: 0;
@@ -2373,7 +2373,7 @@ ol {
 	height: 5px;
 	background: rgba(0, 0, 0, 0.1);
 	z-index: 1000;
-	/* display: none; */
+
 }
 
 .mobile-progress-menu.active {
@@ -2415,10 +2415,81 @@ ol {
 }
 
 @media only screen and (min-width: 768px) {
-
-	/* Sembunyikan menu mobile pada layar >768px */
-	/* .mobile-progress-menu, */
 	.page-jump-menu {
 		display: none !important;
 	}
+} */
+
+/* Mobile Progress Menu */
+.mobile-progress-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15px; /* Diperbesar */
+    background: rgba(11, 12, 42, 0.9);
+    z-index: 1000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.progress-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#scroll-progress-bar {
+    height: 3px;
+    background: #e53637;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-jump-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    background: #0b0c2a;
+    border-top: 2px solid #e53637;
+    z-index: 1001; /* Naikkan z-index */
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 -4px 20px rgba(229, 54, 55, 0.2);
+    display: block !important; /* Tambahkan ini */
+    visibility: hidden; /* Ganti display none */
+}
+
+.page-jump-menu.active {
+    transform: translateY(0);
+    visibility: visible;
+}
+
+.page-jump-menu select {
+    width: 100%;
+    padding: 12px 40px 12px 15px;
+    border: 2px solid #e53637;
+    border-radius: 4px;
+    background: #1a1b3d url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e53637'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat right 15px center/18px;
+    color: #fff;
+    font-family: 'Mulish', sans-serif;
+    font-size: 14px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    transition: all 0.3s ease;
+}
+
+.page-jump-menu select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(229, 54, 55, 0.3);
+}
+
+/* Responsive */
+@media only screen and (min-width: 768px) {
+    .mobile-progress-menu,
+    .page-jump-menu {
+        display: none !important;
+    }
 }
