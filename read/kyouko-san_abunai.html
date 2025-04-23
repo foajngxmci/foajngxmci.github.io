@@ -161,7 +161,6 @@
         });
     </script>
 
-
     <!-- Page Jump Dropdown Menu -->
     <div class="page-jump-menu">
         <select id="chapter-select" aria-label="Jump to page">
@@ -180,7 +179,7 @@
 
     <script>
         const chapterSelect = document.getElementById('chapter-select');
-        const currentUrl = window.location.href; // Tambahin ini biar nggak error
+        const currentUrl = window.location.href;
     
         // Set selected option berdasarkan URL saat ini
         for (let option of chapterSelect.options) {
