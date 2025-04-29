@@ -2453,6 +2453,11 @@ ol {
 	}
 } */
 
+/* Tambahkan di bagian mobile-progress-menu */
+.mobile-progress-menu {
+    touch-action: manipulation; /* Mencegah zoom default */
+}
+
 /* Mobile Progress Menu */
 .mobile-progress-menu {
     position: fixed;
