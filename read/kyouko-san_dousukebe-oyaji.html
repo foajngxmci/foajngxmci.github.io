@@ -151,7 +151,7 @@
             document.addEventListener('touchstart', (e) => {
                 const currentTime = new Date().getTime();
                 const tapLength = currentTime - lastTap;
-                if (tapLength < 500 && tapLength > 0) {
+                if (tapLength < 200 && tapLength > 0) {
                     document.querySelector('.mobile-progress-menu').classList.toggle('active');
                     document.querySelector('.page-jump-menu').classList.toggle('active');
                     e.preventDefault();

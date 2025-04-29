@@ -193,31 +193,6 @@
                 }
                 lastTap = currentTime;
             });
-
-            // Tambahkan variabel tracking posisi
-        //     let lastTapX = 0;
-        //     let lastTapY = 0;
-        //     document.addEventListener('touchstart', (e) => {
-        //         const currentTime = new Date().getTime();
-        //         const tapLength = currentTime - lastTap;
-        //         const touch = e.touches[0] || e.changedTouches[0];
-
-        //         // Cek jarak dan waktu
-        //         if (tapLength < 300 && tapLength > 0 &&
-        //             Math.abs(touch.pageX - lastTapX) < 30 &&
-        //             Math.abs(touch.pageY - lastTapY) < 30) {
-
-        //             // Toggle menu
-        //             document.querySelector('.mobile-progress-menu').classList.toggle('active');
-        //             document.querySelector('.page-jump-menu').classList.toggle('active');
-        //             e.preventDefault();
-        //         }
-
-        //         // Simpan posisi terakhir
-        //         lastTap = currentTime;
-        //         lastTapX = touch.pageX;
-        //         lastTapY = touch.pageY;
-        //     });
         });
     </script>
 
