@@ -98,18 +98,18 @@
                 // 4. Bangun slide baru
                 selected.forEach(manga => {
                     const item = $(`
-          <div class="hero__items set-bg" data-setbg="${manga.poster}">
-            <div class="row">
-              <div class="col-lg-6 col-12">
-                <div class="hero__text">
-                  <div class="label">${manga.tags[0] || ''}</div>
-                  <h2>${manga.title}</h2>
-                  <p>${manga.episodes} Episodes</p>
-                  <a href="${manga.link}"><span>Read</span> <i class="fa fa-angle-right"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>`);
+                <div class="hero__items set-bg" data-setbg="${manga.poster}">
+                    <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <div class="hero__text">
+                        <div class="label">${manga.tags[0] || ''}</div>
+                        <h2>${manga.title}</h2>
+                        <p>${manga.episodes} Episodes</p>
+                        <a href="${manga.link}"><span>Read</span> <i class="fa fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                    </div>
+                </div>`);
                     sliderEl.append(item);
                 });
 
@@ -136,6 +136,35 @@
                     autoHeight: false,
                     autoplay: true,
                     mouseDrag: false
+                });
+
+                const shuffled = [...data].sort(() => 0.5 - Math.random());
+                const selectedTrending = shuffled.slice(0, 6);
+                const container = document.getElementById('random-manga-container');
+
+                selectedTrending.forEach(manga => {
+                    const col = document.createElement('div');
+                    col.className = 'col-lg-4 col-md-6 col-sm-6';
+                    col.innerHTML = `
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="${manga.poster}">
+                                    <div class="ep">${manga.episodes}</div>
+                                    <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                </div>
+                                <div class="product__item__text">
+                                    <ul>
+                                        ${manga.tags.map(tag => `<li>${tag}</li>`).join('')}
+                                    </ul>
+                                    <h5><a href="${manga.link}">${manga.title}</a></h5>
+                                </div>
+                            </div>
+                            `;
+                    container.appendChild(col);
+
+                    // Set background image
+                    const setBgDiv = col.querySelector('.set-bg');
+                    setBgDiv.style.backgroundImage = `url(${manga.poster})`;
                 });
             })
             .catch(err => console.error('Error loading manga.json:', err));
