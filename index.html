@@ -68,7 +68,7 @@
         <div class="container">
             <div class="hero__slider owl-carousel">
 
-                <div class="hero__items set-bg" data-setbg="img/poster/wotome-haha.webp">
+                <!-- <div class="hero__items set-bg" data-setbg="img/poster/wotome-haha.webp">
                     <div class="row">
                         <div class="col-lg-6 col-12">
                             <div class="hero__text">
@@ -105,7 +105,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -218,7 +218,17 @@
                         const setBgDiv = col.querySelector('.set-bg');
                         setBgDiv.style.backgroundImage = `url(${manga.poster})`;
                     });
+                })
+                .catch(error => console.error('Error loading manga data:', error));
+        });
+        
+    </script>
 
+
+
+</body>
+
+</html>
                     // Initialize Owl Carousel setelah konten dimuat
                     $('.hero__slider').owlCarousel({
                         items: 1,
@@ -245,10 +255,3 @@
                 .catch(error => console.error('Error loading manga data:', error));
         });
 
-    </script>
-
-
-
-</body>
-
-</html>
