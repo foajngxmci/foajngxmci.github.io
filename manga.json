@@ -1019,5 +1019,30 @@
                      "Censored"
                  ],
         "censor":  "Censored"
+    },
+    {
+        "title":  "NTRecording",
+        "poster":  "img/poster/ntrecording.jpg",
+        "link":  "read/ntrecording.html",
+        "episodes":  1,
+        "tags":  [
+                     "MILF",
+                     "MMF",
+                     "Group",
+                     "Uncensored"
+                 ],
+        "censor":  "Uncensored"
+    },
+    {
+        "title":  "Daily Life at the Monster Girl Manor",
+        "poster":  "img/poster/daily-life-monster.jpg",
+        "link":  "read/daily-life-monster.html",
+        "episodes":  1,
+        "tags":  [
+                     "Group",
+                     "Shota",
+                     "Uncensored"
+                 ],
+        "censor":  "Uncensored"
     }
 ]
