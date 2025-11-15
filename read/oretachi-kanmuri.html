@@ -81,6 +81,9 @@
                     const container = document.getElementById("gambar-container");
 
                     for (let i = 1; i <= 32; i++) {
+                        let indexSkip = [2,3,13];
+                        if (indexSkip.includes(i)) continue;
+
                         const num = String(i).padStart(3, '0');
 
                         const img = document.createElement("img");

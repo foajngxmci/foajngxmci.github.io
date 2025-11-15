@@ -138,10 +138,11 @@
 
             const chapterSelect = document.getElementById('chapter-select');
 
+            // 👥👤
             // Daftar chapter dan index gambar tujuan
             const chapters = [
-                { name: "Summer Wife Part 1", targetImgIndex: 0 },
-		{ name: "Summer Wife Part 2", targetImgIndex: 103 },
+                { name: "👥 Summer Wife Part 1", targetImgIndex: 0 },
+                { name: "👥 Summer Wife Part 2", targetImgIndex: 103 },
             ];
 
             // Populasi dropdown chapter
@@ -160,7 +161,7 @@
                 const target = chapters[chapterIndex].targetImgIndex;
                 const imgs = document.querySelectorAll('#gambar-container img');
                 console.log(imgs);
-                
+
 
                 if (imgs[target]) {
                     imgs[target].scrollIntoView({

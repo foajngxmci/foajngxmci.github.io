@@ -81,11 +81,17 @@
                     const container = document.getElementById("gambar-container");
 
                     for (let i = 1; i <= 178; i++) {
+                        let jpgIndex = [1,2,3,4,177,178]
+
                         const num = String(i).padStart(4, '0');
 
                         const img = document.createElement("img");
 
-                        img.src = `../img/manga/Hamegaki x Yaritsuma/${num}.jpg`;
+                        if (jpgIndex.includes(i)) {
+                            img.src = `../img/manga/Hamegaki x Yaritsuma/${num}.jpg`;
+                        } else {
+                            img.src = `../img/manga/Hamegaki x Yaritsuma/${num}.png`;
+                        }
 
                         img.alt = `Gambar ${num}`;
                         container.appendChild(img);
@@ -138,9 +144,17 @@
 
             const chapterSelect = document.getElementById('chapter-select');
 
+            // 👥👤
             // Daftar chapter dan index gambar tujuan
             const chapters = [
-                { name: "First MMF", targetImgIndex: 30 }
+                { name: "👤 That Wife is My Woman 1", targetImgIndex: 4 },
+                { name: "👥 First MMF", targetImgIndex: 28 },
+                { name: "👤 That Wife is My Woman 2", targetImgIndex: 40 },
+                { name: "👥 Second MMF", targetImgIndex: 48 },
+                { name: "👤 That Wife is My Woman Final", targetImgIndex: 74 },
+                { name: "👤 Side Story (Eiko)", targetImgIndex: 114 },
+                { name: "👤 Side Story (Eiko) 2", targetImgIndex: 144 },
+                { name: "👥 Third MMF", targetImgIndex: 153},
             ];
 
             // Populasi dropdown chapter

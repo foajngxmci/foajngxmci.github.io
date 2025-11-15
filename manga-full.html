@@ -11,8 +11,7 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -70,12 +69,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" id="manga-container">
-                            <!-- Manga cards will be inserted here by JavaScript -->
 
+                        <!-- Pagination Atas -->
+                        <div class="product__pagination" id="pagination-top"></div>
+                        <hr>
+
+                        <div class="row" id="manga-container">
+                            <!-- Manga cards inserted by JS -->
                         </div>
-                        <div class="product__pagination" id="pagination-container">
-                        </div>
+
+                        <!-- Pagination Bawah -->
+                        <div class="product__pagination" id="pagination-bottom"></div>
                     </div>
                 </div>
 
@@ -96,18 +100,12 @@
                         <a href="./"><img src="img/logo.png" alt=""></a>
                     </div>
                 </div>
-                <div class="col-lg-6">
-
-                </div>
+                <div class="col-lg-6"></div>
                 <div class="col-lg-3">
-                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    <p>
                         Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
-                        is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                            target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | Template by Colorlib
                     </p>
-
                 </div>
             </div>
         </div>
@@ -124,123 +122,109 @@
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+
+    <!-- Pagination + Manga Loader Script -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const itemsPerPage = 12;
-            let mangaData = [];
-            let currentPage = 1;
-            let totalPages = 0;
+    document.addEventListener('DOMContentLoaded', function () {
+        const itemsPerPage = 12;
+        let mangaData = [];
+        let currentPage = 1;
+        let totalPages = 0;
 
-            // Fetch data JSON
-            fetch('https://raw.githubusercontent.com/foajngxmci/foajngxmci.github.io/refs/heads/main/manga.json')
-                .then(response => response.json())
-                .then(data => {
-                    mangaData = data.reverse();
-                    totalPages = Math.ceil(mangaData.length / itemsPerPage);
-                    renderPage(currentPage);
-                    renderPagination();
-                })
-                .catch(error => console.error('Error loading manga data:', error));
+        // Fetch data JSON
+        fetch('https://raw.githubusercontent.com/foajngxmci/foajngxmci.github.io/refs/heads/main/manga.json')
+            .then(response => response.json())
+            .then(data => {
+                mangaData = data.reverse();
+                totalPages = Math.ceil(mangaData.length / itemsPerPage);
+                renderPage(currentPage);
+                renderPagination('pagination-top');
+                renderPagination('pagination-bottom');
+            })
+            .catch(error => console.error('Error loading manga data:', error));
 
-            // Render manga untuk halaman tertentu
-            function renderPage(page) {
-                const container = document.getElementById('manga-container');
-                container.innerHTML = ''; // Kosongkan kontainer
+        // Render manga halaman tertentu
+        function renderPage(page) {
+            const container = document.getElementById('manga-container');
+            container.innerHTML = '';
 
-                const startIndex = (page - 1) * itemsPerPage;
-                const endIndex = startIndex + itemsPerPage;
-                const pageData = mangaData.slice(startIndex, endIndex);
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageData = mangaData.slice(startIndex, endIndex);
 
-                pageData.forEach(manga => {
-                    // Membuat card tiap manga
+            pageData.forEach(manga => {
+                const isCensored = manga.censor === "Censored";
+                const censorClass = isCensored ? "censored" : "uncensored";
+                const censorLabel = isCensored ? "CEN" : "UNC";
 
-                    const isCensored = manga.censor === "Censored";
-                    const censorClass = isCensored ? "censored" : "uncensored";
-                    const censorLabel = isCensored ? "CEN" : "UNC";
-
-                    const colDiv = document.createElement('div');
-                    colDiv.className = 'col-lg-3 col-md-6 col-sm-6 manga-card';
-                    colDiv.innerHTML = `
-                        <div class="product__item">
+                const colDiv = document.createElement('div');
+                colDiv.className = 'col-lg-3 col-md-6 col-sm-6 manga-card';
+                colDiv.innerHTML = `
+                    <div class="product__item">
                         <div class="product__item__pic set-bg" style="background-image: url(${manga.poster});">
                             <div class="${censorClass}">${censorLabel}</div>
                             <div class="comment"><i class="fa fa-photo"></i> ${manga.pages}</div>
-                            <div class="view"><i class="fa fa-book"></i> ${manga.episodes} </div>
+                            <div class="view"><i class="fa fa-book"></i> ${manga.episodes}</div>
                         </div>
                         <div class="product__item__text">
                             <ul>
-                            ${manga.tags.map(tag => `<li>${tag}</li>`).join('')}
+                                ${manga.tags.map(tag => `<li>${tag}</li>`).join('')}
                             </ul>
                             <h5><a href="${manga.link}">${manga.title}</a></h5>
                         </div>
-                        </div>
-                    `;
-                    container.appendChild(colDiv);
-                });
+                    </div>`;
+
+                container.appendChild(colDiv);
+            });
+        }
+
+        // Render pagination
+        function renderPagination(targetId) {
+            const paginationContainer = document.getElementById(targetId);
+            paginationContainer.innerHTML = '';
+
+            // Prev
+            if (currentPage > 1) {
+                const prev = document.createElement('a');
+                prev.href = '#';
+                prev.innerHTML = '<i class="fa fa-angle-double-left"></i>';
+                prev.onclick = (e) => { e.preventDefault(); currentPage--; updateAll(); };
+                paginationContainer.appendChild(prev);
             }
 
-            // Fungsi untuk merender pagination dengan style <div class="product__pagination">
-            function renderPagination() {
-                const paginationContainer = document.getElementById('pagination-container');
-                paginationContainer.innerHTML = '';
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.createElement('a');
+                pageBtn.href = '#';
+                pageBtn.innerText = i;
+                if (i === currentPage) pageBtn.classList.add('current-page');
 
-                // Tombol Prev (jika halaman tidak di halaman pertama)
-                if (currentPage > 1) {
-                    const prevLink = document.createElement('a');
-                    prevLink.href = '#';
-                    prevLink.innerHTML = '<i class="fa fa-angle-double-left"></i>';
-                    prevLink.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        currentPage--;
-                        renderPage(currentPage);
-                        renderPagination();
-                    });
-                    paginationContainer.appendChild(prevLink);
-                }
+                pageBtn.onclick = (e) => {
+                    e.preventDefault();
+                    currentPage = i;
+                    updateAll();
+                };
 
-                // Nomor halaman
-                for (let i = 1; i <= totalPages; i++) {
-                    const pageLink = document.createElement('a');
-                    pageLink.href = '#';
-                    pageLink.innerText = i;
-                    if (i === currentPage) {
-                        pageLink.classList.add('current-page');
-                    }
-                    pageLink.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        currentPage = i;
-                        renderPage(currentPage);
-                        renderPagination();
-                    });
-                    paginationContainer.appendChild(pageLink);
-                }
-
-                // Tombol Next (jika bukan di halaman terakhir)
-                if (currentPage < totalPages) {
-                    const nextLink = document.createElement('a');
-                    nextLink.href = '#';
-                    nextLink.innerHTML = '<i class="fa fa-angle-double-right"></i>';
-                    nextLink.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        currentPage++;
-                        renderPage(currentPage);
-                        renderPagination();
-                    });
-                    paginationContainer.appendChild(nextLink);
-                }
+                paginationContainer.appendChild(pageBtn);
             }
 
-            // Fetch data JSON dari file manga.json
-            fetch('https://raw.githubusercontent.com/foajngxmci/foajngxmci.github.io/refs/heads/main/manga.json')
-                .then(response => response.json())
-                .then(data => {
-                    mangaData = data.reverse();
-                    totalPages = Math.ceil(mangaData.length / itemsPerPage);
-                    renderPage(currentPage);  // Render halaman pertama secara default
-                    renderPagination();
-                })
-                .catch(error => console.error('Error loading manga data:', error));
-        });
+            // Next
+            if (currentPage < totalPages) {
+                const next = document.createElement('a');
+                next.href = '#';
+                next.innerHTML = '<i class="fa fa-angle-double-right"></i>';
+                next.onclick = (e) => { e.preventDefault(); currentPage++; updateAll(); };
+                paginationContainer.appendChild(next);
+            }
+        }
+
+        function updateAll() {
+            renderPage(currentPage);
+            renderPagination('pagination-top');
+            renderPagination('pagination-bottom');
+        }
+
+    });
     </script>
 
 </body>
