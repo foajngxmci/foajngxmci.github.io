@@ -67,7 +67,7 @@
             .then(res => res.json())
             .then(data => {
 
-            /* --------------------------- CAROUSEL RANDOM -----------------------------------*/
+                /* --------------------------- CAROUSEL RANDOM -----------------------------------*/
                 // Acak dan pilih 3 item
                 const selected = data
                     .sort(() => 0.5 - Math.random())
@@ -98,13 +98,13 @@
                     sliderEl.append(item);
                 });
 
-                // 5. Set background image via data-setbg
+                // Set background image via data-setbg
                 sliderEl.find('.set-bg').each(function () {
                     const bg = $(this).data('setbg');
                     $(this).css('background-image', `url(${bg})`);
                 });
 
-                // 6. Inisialisasi ulang Owl Carousel
+                // Inisialisasi ulang Owl Carousel
                 sliderEl.owlCarousel({
                     loop: true,
                     margin: 0,
@@ -122,10 +122,10 @@
                     autoplay: true,
                     mouseDrag: false
                 });
-            /* --------------------------- END CAROUSEL RANDOM -----------------------------------*/
+                /* --------------------------- END CAROUSEL RANDOM -----------------------------------*/
 
 
-            /* ---------------------------- RANDOM TRENDING NOW ------------------------------*/
+                /* ---------------------------- RANDOM TRENDING NOW ------------------------------*/
                 const shuffled = [...data].sort(() => 0.5 - Math.random());
                 const selectedTrending = shuffled.slice(0, 6);
                 const container = document.getElementById('random-manga-container');
@@ -158,9 +158,9 @@
                     const setBgDiv = col.querySelector('.set-bg');
                     setBgDiv.style.backgroundImage = `url(${manga.poster})`;
                 });
-            /* ----------------------------- END RANDOM TRENDING NOW ------------------------------*/
+                /* ----------------------------- END RANDOM TRENDING NOW ------------------------------*/
 
-            /* ----------------------------- SIDEBAR FILTER TAG ------------------------------*/
+                /* ----------------------------- SIDEBAR FILTER TAG ------------------------------*/
                 const allTags = new Set(["Uncensored", "MILF", "Story Arc"]);
                 const defaultTag = "Uncensored";
 
@@ -213,7 +213,28 @@
                         renderFilteredManga(selectedTag);
                     }
                 });
-            /* ----------------------------- END SIDEBAR FILTER TAG ------------------------------*/
+               /* ----------------------------- END SIDEBAR FILTER TAG ------------------------------*/
+
+               /* ---------------------------------- KONFIRMASI LARGE FILES ------------------------------ */
+                data.forEach(manga => {
+                    const links = document.querySelectorAll(`a[href="${manga.link}"]`);
+
+                    links.forEach(link => {
+                        link.addEventListener("click", function (e) {
+                            if (manga.large_files === "yes") {
+                                e.preventDefault();
+
+                                const confirmOpen = confirm(
+                                    "File gambar terlalu besar, hanya bisa dibuka di file server lokal.\nTetap buka?"
+                                );
+
+                                if (confirmOpen) {
+                                    window.location.href = manga.link;
+                                }
+                            }
+                        });
+                    });
+                });
 
             })
             .catch(err => console.error('Error loading manga.json:', err));
