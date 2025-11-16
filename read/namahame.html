@@ -81,15 +81,19 @@
                     const container = document.getElementById("gambar-container");
 
                     for (let i = 1; i <= 167; i++) {
+                        if (i == 33) {
+                            continue; // Skip gambar 0076
+                        }
+
                         const num = String(i).padStart(4, '0');
 
                         const img = document.createElement("img");
 
-			if (i == 1 || i == 2 || i == 3) {
-				img.src = `../img/manga/Boku no Namahame Mama/${num}.jpg`;
-			} else {
-                        	img.src = `../img/manga/Boku no Namahame Mama/${num}.png`;
-			}
+                        if (i == 1 || i == 2 || i == 3) {
+                            img.src = `../img/manga/Boku no Namahame Mama/${num}.jpg`;
+                        } else {
+                            img.src = `../img/manga/Boku no Namahame Mama/${num}.png`;
+                        }
 
                         img.alt = `Gambar ${num}`;
                         container.appendChild(img);
@@ -142,13 +146,14 @@
 
             const chapterSelect = document.getElementById('chapter-select');
 
+            // 👥👤
             // Daftar chapter dan index gambar tujuan
             const chapters = [
-                { name: "Chapter 1", targetImgIndex: 3 },
-                { name: "Chapter 2", targetImgIndex: 42 },
-                { name: "Chapter 3", targetImgIndex: 78 },
-                { name: "Chapter 4", targetImgIndex: 116 },
-                { name: "Chapter 5", targetImgIndex: 149 }
+                { name: "👤 Disguised and Tricked by My Son 1", targetImgIndex: 3 },
+                { name: "👥 Disguised and Tricked by My Son 2", targetImgIndex: 37 },
+                { name: "👥 Disguised and Tricked by My Son 3", targetImgIndex: 72 },
+                { name: "👤 Mommy Removal", targetImgIndex: 102 },
+                { name: "👤 The Neighbor I Admire", targetImgIndex: 131 }
             ];
 
             // Populasi dropdown chapter
