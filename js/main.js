@@ -82,15 +82,20 @@
 
                 // Bangun slide baru
                 selected.forEach(manga => {
+                    let labelCarousel = ``;
+                    for (let i = 0; i < manga.tags.length; i++) {
+                        labelCarousel += `<div class="label">${manga.tags[i]}</div> `;
+                    }
+
                     const item = $(`
                 <div class="hero__items set-bg" data-setbg="${manga.poster}">
                     <div class="row">
                     <div class="col-lg-6 col-12">
                         <div class="hero__text">
-                        <div class="label">${manga.tags || ''}</div>
+                        ${labelCarousel}
                         <h2>${manga.title}</h2>
-                        <p>${manga.episodes} Chapter</p>
-                        <a href="${manga.link}"><span>Read</span> <i class="fa fa-angle-right"></i></a>
+                        <p>${manga.episodes} Chapter  -  ${manga.pages} Pages</p>
+                        <a href="${manga.link}"><span>Read ></span></a>
                         </div>
                     </div>
                     </div>
@@ -213,9 +218,9 @@
                         renderFilteredManga(selectedTag);
                     }
                 });
-               /* ----------------------------- END SIDEBAR FILTER TAG ------------------------------*/
+                /* ----------------------------- END SIDEBAR FILTER TAG ------------------------------*/
 
-               /* ---------------------------------- KONFIRMASI LARGE FILES ------------------------------ */
+                /* ---------------------------------- KONFIRMASI LARGE FILES ------------------------------ */
                 data.forEach(manga => {
                     const links = document.querySelectorAll(`a[href="${manga.link}"]`);
 
