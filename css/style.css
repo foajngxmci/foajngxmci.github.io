@@ -2555,3 +2555,33 @@ ol {
         display: none !important;
     }
 }
+
+.anime__details__characters {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.character__list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.character__item {
+    width: 120px;
+    text-align: center;
+}
+
+.character__item img {
+    width: 100%;
+    border-radius: 8px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.character__item h6 {
+    color: #fff;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
