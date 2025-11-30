@@ -2585,3 +2585,108 @@ ol {
     font-size: 14px;
 }
 
+.chapter-nav {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.btn-nav {
+    display: inline-block;
+    background: #e53637;
+    color: #fff !important;
+    padding: 10px 25px;
+    margin: 0 10px;
+    border-radius: 50px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.btn-nav i {
+    font-size: 14px;
+}
+
+.btn-nav:hover {
+    background: #ff4343;
+    color: #fff;
+}
+
+.btn-nav.disabled,
+.btn-nav.disabled:hover {
+    background: #555;
+    cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.chapter-nav .btn-nav {
+    background: #636363 !important;
+    color: #fff !important;
+    padding: 10px 25px !important;
+    border-radius: 50px !important;
+    display: inline-block !important;
+    margin: 0 10px !important;
+    font-weight: 700 !important;
+}
+
+.chapter-nav .btn-nav-home {
+    background: #ff3333 !important;
+    color: #fff !important;
+    padding: 10px 25px !important;
+    border-radius: 50px !important;
+    display: inline-block !important;
+    margin: 0 10px !important;
+    font-weight: 700 !important;
+}
+
+.chapter-nav .btn-nav.disabled {
+    background: #555 !important;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Spacing tombol navigasi di mobile */
+@media only screen and (max-width: 767px) {
+    .chapter-nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px; /* jarak antara tombol */
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .chapter-nav .btn-nav {
+        width: auto;
+        text-align: center;
+        padding: 12px 28px !important;
+        border-radius: 50px !important;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .chapter-nav {
+        margin-bottom: 10px !important; /* jarak antar tombol & konten */
+    }
+
+    .anime-details {
+        padding-top: 40px !important; /* kecilkan jarak dari header */
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .chapter-nav {
+        width: 100% !important;          /* pastikan selebar layar */
+        display: flex !important;
+        flex-direction: row !important;  /* satu baris */
+        justify-content: center !important; /* pusatkan */
+        align-items: center !important;
+        gap: 8px !important;
+        padding: 0 !important;           /* hapus padding bawaan container */
+        margin-left: 0 !important;       /* hapus kemungkinan geser */
+        margin-right: 0 !important;
+    }
+
+    .chapter-nav a {
+        white-space: nowrap; /* cegah icon turun baris */
+    }
+}

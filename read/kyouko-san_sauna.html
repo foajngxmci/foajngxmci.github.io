@@ -7,7 +7,7 @@
     <meta name="keywords" content="Anime, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Anime | Template</title>
+    <title>Sauna Match Edition!</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -63,14 +63,31 @@
     </header>
     <!-- Header End -->
 
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="/"><i class="fa fa-home"></i> Home</a>
+                        <a href="/collection/kyouko-san.html"><i class="fa fa-home"></i> Kyouko-san</a>
+                        <a href="/detail/kyouko-4.html">Sauna de Taiketsu! </a>
+                        <span>Part 1</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
     <!-- Blog Details Section Begin -->
     <section class="blog-details spad">
         <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-8">
                     <div class="blog__details__title">
-                         
-                        <h2>Karamare Tsuma Kyouko-san Sauna</h2>
+
+                        <h2>Sauna Match Edition!</h2>
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -81,7 +98,6 @@
                     const container = document.getElementById("gambar-container");
 
                     for (let i = 1; i <= 72; i++) {
-                        // Format angka jadi tiga digit (001, 002, ..., 175)
                         const num = String(i).padStart(2, '0');
 
                         const img = document.createElement("img");
@@ -164,32 +180,24 @@
 
     <!-- Page Jump Dropdown Menu -->
     <div class="page-jump-menu">
-        <select id="chapter-select" aria-label="Jump to page">
-            <option value="">Pilih Chapter</option>
-            <option value="kyouko-san_makezugirai.html.">1 - Makezugirai no Kyouka-san</option>
-            <option value="kyouko-san_dousukebe-oyaji.html">2 - Dousukebe Oyaji to Kyouka-san</option>
-            <option value="kyouko-san_kyoudai.html">3 - Karamare Tsuma no Kyouko-san Dosukebe Oikko Kyoudai-hen</option>
-            <option value="kyouko-san_sauna.html">4 - Karamare Tsuma no Kyouko-san Sauna de Taiketsu! Hen</option>
-            <option value="kyouko-san_abunai.html">5 - Karamare Tsuma no Kyouko-san Abunai Kaisuiyoku Hen Zetsurin
-                Gikei-hen</option>
-            <option value="kyouko-san_arbeit.html">6 - Karamare Tsuma no Kyouko-san H na Omise de Arbeit-hen</option>
-            <option value="none" disabled>7 -
-                Karamare_Tsuma_no_Kyoukosan_to_Taichisan_Kyoukokun…_Once_Again</option>
+        <select id="chapter-select" aria-label="Jump to page" data-current="part1">
+            <option value="../detail/kyouko-3.html" data-id="prequel">[PREQUEL] Perverted Nephew Brothers </option>
+            <option value="" disabled data-id="part1">Sauna Match Edition!</option>
+            <option value="../detail/kyouko-5.html" data-id="sequel">[SEQUEL] Dangerous Beach Edition</option>
         </select>
     </div>
 
     <script>
         const chapterSelect = document.getElementById('chapter-select');
-        const currentUrl = window.location.href; // Tambahin ini biar nggak error
-    
-        // Set selected option berdasarkan URL saat ini
+        const current = chapterSelect.dataset.current; // baca status manual
+
         for (let option of chapterSelect.options) {
-            if (option.value && currentUrl.includes(option.value)) {
+            if (option.dataset.id === current) {
                 option.selected = true;
                 break;
             }
         }
-    
+
         // Pindah halaman kalau user ganti select
         chapterSelect.addEventListener('change', function () {
             const selectedValue = this.value;
