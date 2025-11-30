@@ -1643,5 +1643,21 @@
         "censor":  "Censored",
         "large_files":  "no",
         "pages":  0
+    },
+    {
+        "title":  "All You Can Fuck For a Price",
+        "poster":  "img/poster/all-you-can-fuck.jpg",
+        "link":  "read/all-you-can-fuck.html",
+        "episodes":  1,
+        "tags":  [
+                     "School",
+                     "Gyaru",
+                     "Group",
+                     "Prostitution",
+                     "Uncensored"
+                 ],
+        "censor":  "Uncensored",
+        "large_files":  "no",
+        "pages":  48
     }
 ]
