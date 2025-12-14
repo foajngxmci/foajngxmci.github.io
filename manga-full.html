@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Anime Template">
+    <meta name="keywords" content="Anime, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Anime | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/plyr.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header__logo">
+                        <a href="./">
+                            <img src="img/logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="header__nav">
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <li><a href="./">Home</a></li>
+                                <li class="active"><a href="./manga-full.html">Libraries</a></li>
+                                <li><a href="./categories.html">Categories</a></li>
+                                <li><a href="./search.html">Search</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Product Section Begin -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="trending__product">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="section-title">
+                                    <h4>All Manga</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pagination Atas -->
+                        <div class="product__pagination" id="pagination-top"></div>
+                        <hr>
+
+                        <div class="row" id="manga-container">
+                            <!-- Manga cards inserted by JS -->
+                        </div>
+
+                        <!-- Pagination Bawah -->
+                        <div class="product__pagination" id="pagination-bottom"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Product Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer">
+        <div class="page-up">
+            <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="footer__logo">
+                        <a href="./"><img src="img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6"></div>
+                <div class="col-lg-3">
+                    <p>
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | Template by
+                        Colorlib
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Pagination + Manga Loader Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const itemsPerPage = 12;
+            let mangaData = [];
+            let currentPage = 1;
+            let totalPages = 0;
+
+            // Fetch data JSON
+            fetch('https://raw.githubusercontent.com/foajngxmci/foajngxmci.github.io/refs/heads/main/manga.json')
+                .then(response => response.json())
+                .then(data => {
+                    mangaData = data.reverse();
+                    totalPages = Math.ceil(mangaData.length / itemsPerPage);
+                    renderPage(currentPage);
+                    renderPagination('pagination-top');
+                    renderPagination('pagination-bottom');
+
+                    /* ---------------------------------- KONFIRMASI LARGE FILES ------------------------------ */
+                    data.forEach(manga => {
+                        const links = document.querySelectorAll(`a[href="${manga.link}"]`);
+
+                        links.forEach(link => {
+                            link.addEventListener("click", function (e) {
+                                if (manga.large_files === "yes") {
+                                    e.preventDefault();
+
+                                    const confirmOpen = confirm(
+                                        "File gambar terlalu besar, hanya bisa dibuka di file server lokal.\nTetap buka?"
+                                    );
+
+                                    if (confirmOpen) {
+                                        window.location.href = manga.link;
+                                    }
+                                }
+                            });
+                        });
+                    });
+                })
+                .catch(error => console.error('Error loading manga data:', error));
+
+            // Render manga halaman tertentu
+            function renderPage(page) {
+                const container = document.getElementById('manga-container');
+                container.innerHTML = '';
+
+                const startIndex = (page - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                const pageData = mangaData.slice(startIndex, endIndex);
+
+                pageData.forEach(manga => {
+                    const isCensored = manga.censor === "Censored";
+                    const censorClass = isCensored ? "censored" : "uncensored";
+                    const censorLabel = isCensored ? "CEN" : "UNC";
+
+                    const colDiv = document.createElement('div');
+                    colDiv.className = 'col-lg-3 col-md-6 col-sm-6 manga-card';
+                    colDiv.innerHTML = `
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" style="background-image: url(${manga.poster});">
+                            <div class="${censorClass}">${censorLabel}</div>
+                            <div class="comment"><i class="fa fa-photo"></i> ${manga.pages}</div>
+                            <div class="view"><i class="fa fa-book"></i> ${manga.episodes}</div>
+                        </div>
+                        <div class="product__item__text">
+                            <ul>
+                                ${manga.tags.map(tag => `<li>${tag}</li>`).join('')}
+                            </ul>
+                            <h5><a href="${manga.link}">${manga.title}</a></h5>
+                        </div>
+                    </div>`;
+
+                    container.appendChild(colDiv);
+                });
+            }
+
+            // Render pagination
+            function renderPagination(targetId) {
+                const paginationContainer = document.getElementById(targetId);
+                paginationContainer.innerHTML = '';
+
+                // Prev
+                if (currentPage > 1) {
+                    const prev = document.createElement('a');
+                    prev.href = '#';
+                    prev.innerHTML = '<i class="fa fa-angle-double-left"></i>';
+                    prev.onclick = (e) => { e.preventDefault(); currentPage--; updateAll(); };
+                    paginationContainer.appendChild(prev);
+                }
+
+                // Page numbers
+                for (let i = 1; i <= totalPages; i++) {
+                    const pageBtn = document.createElement('a');
+                    pageBtn.href = '#';
+                    pageBtn.innerText = i;
+                    if (i === currentPage) pageBtn.classList.add('current-page');
+
+                    pageBtn.onclick = (e) => {
+                        e.preventDefault();
+                        currentPage = i;
+                        updateAll();
+                    };
+
+                    paginationContainer.appendChild(pageBtn);
+                }
+
+                // Next
+                if (currentPage < totalPages) {
+                    const next = document.createElement('a');
+                    next.href = '#';
+                    next.innerHTML = '<i class="fa fa-angle-double-right"></i>';
+                    next.onclick = (e) => { e.preventDefault(); currentPage++; updateAll(); };
+                    paginationContainer.appendChild(next);
+                }
+            }
+
+            function updateAll() {
+                renderPage(currentPage);
+                renderPagination('pagination-top');
+                renderPagination('pagination-bottom');
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>

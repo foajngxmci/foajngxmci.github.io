@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Anime Template">
+    <meta name="keywords" content="Anime, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chichi Musume - Ryouko to Kyouko</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="../css/plyr.css" type="text/css">
+    <link rel="stylesheet" href="../css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="../css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
+    <!-- <style>
+        
+    </style> -->
+</head>
+
+<body>
+    <!-- Mobile Progress Bar Menu -->
+    <div class="mobile-progress-menu">
+        <div class="progress-container">
+            <div id="scroll-progress-bar"></div>
+        </div>
+    </div>
+
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header__logo">
+                        <a href="../">
+                            <img src="../img/logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="header__nav">
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <li><a href="../">Homepage</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="/"><i class="fa fa-home"></i> Home</a>
+                        <a href="/detail/ryouko-kyouko.html">Chichi Musume - Ryouko to Kyouko</a>
+                        <span>Kyouko Part</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Blog Details Section Begin -->
+    <section class="blog-details spad">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-8">
+                    <div class="blog__details__title">
+
+                        <h2>Chichi Musume - Kyouko Part</h2>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="blog__details__pic" id="gambar-container"></div>
+                </div>
+
+                <script>
+                    const container = document.getElementById("gambar-container");
+
+                    for (let i = 15; i <= 30; i++) {
+                       
+                        const num = String(i).padStart(2, '0');
+
+                        const img = document.createElement("img");
+
+                        img.src = `../img/manga/Chichi Musume - Ryouko to Kyouko/Kyouko/${num}.webp`;
+
+                        img.alt = `Gambar ${num}`;
+                        container.appendChild(img);
+                    }
+                </script>
+
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer">
+        <div class="page-up">
+            <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="footer__logo">
+                        <a href="./"><img src="../img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+                        is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                            target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/player.js"></script>
+    <script src="../js/jquery.nice-select.min.js"></script>
+    <script src="../js/mixitup.min.js"></script>
+    <script src="../js/jquery.slicknav.js"></script>
+    <script src="../js/owl.carousel.min.js"></script>
+    <script src="../js/main.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Progress bar
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (scrollTop / docHeight) * 100;
+                document.getElementById('scroll-progress-bar').style.width = scrolled + '%';
+            });
+
+            // Toggle show/hide menu dengan double tap
+            let lastTap = 0;
+            document.addEventListener('touchstart', (e) => {
+                const currentTime = new Date().getTime();
+                const tapLength = currentTime - lastTap;
+                if (tapLength < 200 && tapLength > 0) {
+                    document.querySelector('.mobile-progress-menu').classList.toggle('active');
+                    document.querySelector('.page-jump-menu').classList.toggle('active');
+                    e.preventDefault();
+                }
+                lastTap = currentTime;
+            });
+        });
+    </script>
+
+    <!-- Page Jump Dropdown Menu -->
+    <div class="page-jump-menu">
+        <select id="chapter-select" aria-label="Jump to page" data-current="part2">
+            <option value="../read/ryouko-kyouko-1.html" data-id="preequel">[PREQUEL] Ryouko Part</option>
+            <option disabled data-id="part2">Kyouko Part</option>
+
+        </select>
+    </div>
+
+    <script>
+        const chapterSelect = document.getElementById('chapter-select');
+        const current = chapterSelect.dataset.current; // baca status manual
+
+        for (let option of chapterSelect.options) {
+            if (option.dataset.id === current) {
+                option.selected = true;
+                break;
+            }
+        }
+
+        // Pindah halaman kalau user ganti select
+        chapterSelect.addEventListener('change', function () {
+            const selectedValue = this.value;
+            if (selectedValue && selectedValue !== "none") {
+                window.location.href = selectedValue;
+            }
+        });
+    </script>
+
+</body>
+
+</html>

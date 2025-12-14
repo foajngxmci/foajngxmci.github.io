@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Search Manga">
+    <meta name="keywords" content="Search, Manga, Hentai, Tags">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Manga | Search</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+    <style>
+        /* search box style */
+        #search-box {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 10px;
+            border: 2px solid #444;
+            background: #1b1b1b;
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 25px;
+            outline: none;
+            transition: .2s;
+        }
+
+        #search-box:focus {
+            border-color: #ff6600;
+        }
+
+        /* fade-in animation */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn .35s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* placeholder */
+        #search-box::placeholder {
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="header__logo">
+                        <a href="./">
+                            <img src="img/logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="header__nav">
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <li><a href="./">Home</a></li>
+                                <li><a href="./manga-full.html">Libraries</a></li>
+                                <li><a href="./categories.html">Categories</a></li>
+                                <li  class="active"><a href="./search.html">Search</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Section -->
+    <section class="product spad">
+        <div class="container">
+
+            <div class="section-title">
+                <h4>Search Manga</h4>
+            </div>
+
+            <!-- Search input -->
+            <input type="text" id="search-box" placeholder="Search by title or tags...">
+
+            <div class="row" id="search-result-container">
+                <!-- Search results will appear here -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p style="text-align:center;">
+                Copyright ©
+                <script>document.write(new Date().getFullYear());</script>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const searchBox = document.getElementById("search-box");
+            const resultContainer = document.getElementById("search-result-container");
+            let mangaList = [];
+
+            // load manga.json
+            fetch("https://raw.githubusercontent.com/foajngxmci/foajngxmci.github.io/refs/heads/main/manga.json")
+                .then(res => res.json())
+                .then(data => mangaList = data);
+
+            // live search
+            searchBox.addEventListener("input", function () {
+                const query = this.value.trim().toLowerCase();
+
+                resultContainer.innerHTML = "";
+
+                if (query === "") return; // kosong → no result
+
+                const results = mangaList.filter(m =>
+                    m.title.toLowerCase().includes(query) ||
+                    m.tags.some(t => t.toLowerCase().includes(query))
+                );
+
+                // tampilkan hasil
+                results.forEach(manga => {
+
+                    const isCensored = manga.censor === "Censored";
+                    const censorClass = isCensored ? "censored" : "uncensored";
+                    const censorLabel = isCensored ? "CEN" : "UNC";
+
+                    const div = document.createElement("div");
+                    div.className = "col-lg-3 col-md-4 col-sm-6 fade-in";
+
+                    div.innerHTML = `
+                        <div class="product__item">
+                            <div class="product__item__pic set-bg" style="background-image:url('${manga.poster}');">
+                                <div class="${censorClass}">${censorLabel}</div>
+                                <div class="view"><i class="fa fa-eye"></i> 9999</div>
+                            </div>
+                            <div class="product__item__text">
+                                <ul>${manga.tags.map(t => `<li>${t}</li>`).join('')}</ul>
+                                <h5><a href="${manga.link}">${manga.title}</a></h5>
+                            </div>
+                        </div>
+                    `;
+
+                    resultContainer.appendChild(div);
+                });
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>
