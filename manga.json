@@ -183,7 +183,7 @@
         "title":  "Secret Wife",
         "poster":  "img/poster/secret-wife.webp",
         "link":  "read/secret-wife.html",
-        "episodes":  1,
+        "episodes":  5,
         "tags":  [
                      "Prostitution",
                      "Group",
@@ -192,7 +192,7 @@
                  ],
         "censor":  "Uncensored",
         "large_files":  "no",
-        "pages":  19
+        "pages":  114
     },
     {
         "title":  "Pai Parade : Swimming Coach",
@@ -2617,5 +2617,20 @@
         "censor":  "Uncensored",
         "large_files":  "no",
         "pages":  89
+    },
+    {
+        "title":  "Re:Incarnation",
+        "poster":  "img/poster/re-incarnation.png",
+        "link":  "read/re-incarnation.html",
+        "episodes":  11,
+        "tags":  [
+                     "MILF",
+                     "Story Arc",
+                     "Group",
+                     "Uncensored"
+                 ],
+        "censor":  "Uncensored",
+        "large_files":  "yes",
+        "pages":  232
     }
 ]
